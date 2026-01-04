@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowState - Browser Time Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .timer-ring-container {
+            transition: transform 0.3s ease;
+        }
+        /* Custom scrollbar for a cleaner look */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+    <script>
+        // Inline script to prevent FOUC (Flash of Unstyled Content) by applying the dark class before rendering
+        try {
+            const saved = localStorage.getItem('flow_state_app_v3');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed.settings?.theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else if (parsed.settings?.theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                } else {
+                    // Default behavior if setting missing but storage exists
+                    document.documentElement.classList.add('dark');
+                }
+            } else {
+                // Default for new users
+                document.documentElement.classList.add('dark');
+            }
+        } catch (e) {}
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "date-fns": "https://esm.sh/date-fns@^4.1.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

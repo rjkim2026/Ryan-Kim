@@ -1,0 +1,5 @@
+{
+  "name": "FlowState: Minimalist Time Tracker",
+  "description": "A feature-rich time-tracking tool implementing Flowmodoro and standard Pomodoro techniques with local persistence, analytics, and streak tracking.",
+  "requestFramePermissions": []
+}
